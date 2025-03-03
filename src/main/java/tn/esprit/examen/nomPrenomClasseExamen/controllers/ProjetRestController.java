@@ -54,4 +54,24 @@ public class ProjetRestController {
                                             @PathVariable("projet-details-id") long projetDetailId) {
         projetService.assignProjetDetailToProjet(projetId, projetDetailId);
     }
+
+    @PostMapping("creer-projet-et-affecter-projet-detail-a-projet/{projet-details-id}")
+    public Projet creerProjetEtAffecterProjetDetailAProjet(@RequestBody Projet projet,
+                                                           @PathVariable("projet-details-id") long projetDetailId) {
+        return projetService.addProjetAndAssignProjetToProjetDetail(projet, projetDetailId);
+    }
+
+    @PutMapping("desaffecter-projet-detail-de-projet/{projet-id}")
+    public Projet desaffecterProjetDetalDeProjet(@PathVariable("projet-id") long projetId) {
+        return projetService.DesaffecterProjetDetalFromProjet(projetId);
+    }
+
+    @PutMapping("desaffecter-projets-de-equipe/{equipe-id}")
+    public List<Projet> desaffecterProjetsDeEquipe(
+            @PathVariable("equipe-id") long equipeId,
+            @RequestParam("projetIds") List<Long> projetIds) {
+        return projetService.desaffecterProjetsDeEquipe(projetIds, equipeId);
+    }
+
 }
+
